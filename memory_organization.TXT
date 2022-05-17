@@ -1,0 +1,37 @@
+Dados para guardar
+can_id = 1 byte
+Node number = 2 bytes
+Node variables = 1 byte cada
+Learned Events = 4 bytes cada evento
+Learned variables = 1 byte pra cada
+Device number = 2 bytes ?
+
+Memory organization
+512 bytes is the max value for simple arduino
+byte=value;explanation
+0xaa ; indicates that it is a merg arduino memory storage
+can_id;store the can_id
+hh Node number;high byte from node number
+ll Node number;low byte from node number
+flags ; 1 byte
+device number:32 bytes allowing 16 device numbers
+amount of node variables ; 1 byte
+amount of learned events;1 byte
+?amount of learned event variables;1 byte
+20 bytes for node variables
+100 bytes for 25 learned events
+450 bytes for learned event variables. 2 bytes for each variable. max of 8 vars per event. 1st is the event number index. the index is the position of the event in the memory range from 0 to 24
+
+
+merg var	1byte
+canid	1byte
+nn	2byte
+flags	1byte
+dn	24byte	12 device numbers
+nv count	1byte
+ev count	1byte
+ev ev vars	1byte
+vars	16byte
+evs	80byte	20 events
+ev vars	376byte
+reserve	8byte

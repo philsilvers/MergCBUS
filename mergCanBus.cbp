@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="mergCanBus" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/mergCanBus" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="src/" />
+					<Add directory="src" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/mergCanBus" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="src/" />
+					<Add directory="src" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="CircularBuffer.cpp" />
+		<Unit filename="CircularBuffer.h" />
+		<Unit filename="LICENSE" />
+		<Unit filename="MergCBUS.cpp" />
+		<Unit filename="MergCBUS.h" />
+		<Unit filename="MergCBUSThrottle.cpp" />
+		<Unit filename="MergCBUSThrottle.h" />
+		<Unit filename="MergMemoryManagement.cpp" />
+		<Unit filename="MergMemoryManagement.h" />
+		<Unit filename="MergNodeIdentification.cpp" />
+		<Unit filename="MergNodeIdentification.h" />
+		<Unit filename="Message.cpp" />
+		<Unit filename="Message.h" />
+		<Unit filename="README.md" />
+		<Unit filename="ThrottleInfo.cpp" />
+		<Unit filename="ThrottleInfo.h" />
+		<Unit filename="mcp_can.cpp" />
+		<Unit filename="mcp_can.h" />
+		<Unit filename="mcp_can_dfs.h" />
+		<Unit filename="memory_organization.TXT" />
+		<Unit filename="opcodes.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot class_diagrams="1" />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
