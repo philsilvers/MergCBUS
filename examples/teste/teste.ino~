@@ -1,0 +1,83 @@
+#include <Arduino.h>
+#include <SPI.h>
+#include <MergCBUS.h>
+#include <Message.h>
+#include <EEPROM.h>
+
+MergCBUS cbus=MergCBUS();
+#define GREEN_LED 5
+#define YELLOW_LED 4
+#define PUSH_BUTTON 3
+//input ports for sensors
+#define SENSORS 15
+byte sensors[SENSORS];
+byte sensors_state[SENSORS];
+
+
+int pb_state=LOW;
+
+void setup(){
+  
+  loadSensorsPorts();
+  
+  
+  Serial.begin(115200);
+  //pinMode(GREEN_LED,OUTPUT);
+  //pinMode(YELLOW_LED,OUTPUT);
+  pinMode(PUSH_BUTTON,INPUT);
+  
+  //canbus.setUpNewMemory();
+  //id config
+  cbus.getNodeId()->setNodeName("MODTESTE",8);
+  cbus.getNodeId()->setModuleId(1);
+  cbus.getNodeId()->setManufacturerId(15);
+  cbus.getNodeId()->setMinCodeVersion(1);
+  cbus.getNodeId()->setMaxCodeVersion(0);
+  cbus.getNodeId()->setSuportedEvents(20);
+  cbus.getNodeId()->setSuportedEventsVariables(8);
+  cbus.getNodeId()->setSuportedNodeVariables(20);   
+  cbus.setStdNN(4444); 
+
+  cbus.setLeds(GREEN_LED,YELLOW_LED);
+  cbus.setPushButton(PUSH_BUTTON);
+  cbus.setDebug(true);
+  cbus.setUserHandlerFunction(&myUserFunc);
+  cbus.initCanBus(53,CAN_125KBPS,10,200);  
+}
+
+void loop (){
+  
+  cbus.run();
+  
+}
+
+void myUserFunc(Message *msg,MergCBUS *mcbus){
+  
+  //check if there is something on some port and send and event
+  for (int i=0;i<SENSORS;i++){
+      if (digitalRead(sensors[i]==HIGH)){
+          if (sensors_state[i]==LOW){
+              //transition. generate an on event
+              sensors_state[i]=HIGH;
+          }
+      }else{
+        if (sensors_state[i]==HIGH){
+              //transition. generate an off event
+              sensors_state[i]=LOW;
+          }
+        
+      }
+  }
+  
+  
+}
+
+void loadSensorsPorts(){
+  
+  byte p=20; 
+  
+  for (int i=0;i<SENSORS;i++){
+     sensors[i]=p+i;
+     pinMode(p+i,INPUT);     
+  }  
+}
